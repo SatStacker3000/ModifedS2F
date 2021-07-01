@@ -5,6 +5,7 @@ This is an RMD file, which is an RMarkdown file.
 
 If you "Knit" this script in RStudio, it produces a report in the form of the PDF in this repository.
 
+# The Formula
 The price is essenitally computed by the following code:
 
 ```
@@ -14,7 +15,16 @@ return(result)
 }
 ```
 
- The DaysToHalving1 - DaysToHalving5 columns are created with these lines of code:
+where:
+
+- x[1] and x[2] are are PlanB's original constants, and
+- x[3] to x[5] are the constants for the spline on DaysToNextHalving.
+
+The spline is a so called penalized spline. To learn more about them you can put ?pspline in the R console, after you have installed the survival package.
+
+These psplines are commonly used in modelling mortality rates.
+
+The DaysToHalving1 - DaysToHalving5 columns are created with these lines of code:
  
 ``` 
 tmp <- dat[,pspline(DaysToHalving, nterm = 4)] %>% as.matrix()
